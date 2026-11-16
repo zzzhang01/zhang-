@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>始皇骑熊巡北疆</title>
+<style>
+  :root { --bg: #0b1a2e; --text: #e8eef6; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; }
+  h1 { font-size: clamp(20px, 4vw, 32px); letter-spacing: .3em; margin: 0 0 12px; color: #f3d27a; }
+  svg { width: 100%; max-width: 960px; height: auto; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+
+  /* 背景滚动 */
+  .far   { animation: scroll 40s linear infinite; }
+  .near  { animation: scroll 14s linear infinite; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-960px); } }
+
+  /* 熊整体上下颠簸 */
+  .rider { animation: bob .8s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  /* 熊腿 */
+  .leg { transform-box: fill-box; transform-origin: 50% 0%; }
+  .legA { animation: stride .8s ease-in-out infinite; }
+  .legB { animation: stride .8s ease-in-out infinite reverse; }
+  @keyframes stride { 0%,100% { transform: rotate(22deg); } 50% { transform: rotate(-22deg); } }
+
+  /* 熊头点头 */
+  .bearHead { transform-box: fill-box; transform-origin: 20% 60%; animation: nod .8s ease-in-out infinite; }
+  @keyframes nod { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(4deg); } }
+
+  /* 冕旒摇摆 */
+  .bead { transform-box: fill-box; transform-origin: 50% 0%; animation: sway .8s ease-in-out infinite; }
+  @keyframes sway { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+  /* 披风飘动 */
+  .cape { animation: flap 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 100% 0%; }
+  @keyframes flap { 0%,100% { transform: skewX(0deg) scaleX(1); } 50% { transform: skewX(-10deg) scaleX(1.08); } }
+
+  /* 举剑手臂 */
+  .swordArm { transform-box: fill-box; transform-origin: 10% 90%; animation: wave 1.6s ease-in-out infinite; }
+  @keyframes wave { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-14deg); } }
+
+  /* 旗帜 */
+  .flag { animation: flag 1s ease-in-out infinite; transform-box: fill-box; transform-origin: 0% 50%; }
+  @keyframes flag { 0%,100% { transform: skewY(0deg); } 50% { transform: skewY(6deg) scaleX(.94); } }
+
+  /* 雪花 */
+  .snow circle { animation: fall linear infinite; }
+  @keyframes fall { from { transform: translate(0,-40px); } to { transform: translate(-60px,600px); } }
+
+  /* 极光 */
+  .aurora { animation: glow 6s ease-in-out infinite; }
+  @keyframes glow { 0%,100% { opacity: .35; } 50% { opacity: .75; } }
+
+  .caption { margin-top: 12px; opacity: .8; font-size: 14px; letter-spacing: .1em; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<h1>始皇骑熊巡北疆</h1>
+
+<svg viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="秦始皇骑着北极熊在雪原上前进的动画">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#061226"/>
+      <stop offset=".6" stop-color="#1b3a63"/>
+      <stop offset="1" stop-color="#4f7fb0"/>
+    </linearGradient>
+    <linearGradient id="auroraG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3dffb0" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#3dffb0" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#8a6bff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="fur" cx=".4" cy=".3" r=".8">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d9e4ee"/>
+    </radialGradient>
+    <linearGradient id="robe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2a2a"/>
+      <stop offset="1" stop-color="#0d0d0d"/>
+    </linearGradient>
+    <!-- 远山 -->
+    <g id="mountains">
+      <path d="M0 330 L80 250 L150 300 L240 210 L330 290 L420 230 L520 310 L600 240 L700 300 L790 220 L880 290 L960 250 L960 400 L0 400Z" fill="#9db8d6"/>
+      <path d="M240 210 L265 235 L250 238 L232 228Z M600 240 L622 262 L590 258Z M790 220 L812 244 L780 240Z" fill="#fff"/>
+    </g>
+    <!-- 近处冰块与松树 -->
+    <g id="props">
+      <path d="M60 440 L90 400 L130 410 L150 440Z" fill="#cfe6f7"/>
+      <path d="M90 400 L110 425 L130 410Z" fill="#fff"/>
+      <g transform="translate(420 380)">
+        <rect x="-4" y="40" width="8" height="20" fill="#5a3b22"/>
+        <path d="M0 -10 L30 45 L-30 45Z" fill="#2c5a4a"/>
+        <path d="M0 -10 L14 16 L-14 16Z" fill="#fff"/>
+      </g>
+      <path d="M700 450 L740 415 L790 430 L800 455Z" fill="#cfe6f7"/>
+      <path d="M740 415 L760 440 L790 430Z" fill="#fff"/>
+    </g>
+  </defs>
+
+  <!-- 天空 -->
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <g class="aurora">
+    <path d="M-20 120 C 200 40, 400 180, 620 90 S 900 60, 980 130 L980 170 C 860 110, 700 200, 540 140 S 160 110, -20 170Z" fill="url(#auroraG)"/>
+  </g>
+  <!-- 月亮 -->
+  <circle cx="820" cy="80" r="34" fill="#fff6d8"/>
+  <circle cx="808" cy="72" r="6" fill="#efe3b8"/>
+  <circle cx="830" cy="92" r="4" fill="#efe3b8"/>
+
+  <!-- 远山滚动 -->
+  <g class="far">
+    <use href="#mountains"/>
+    <use href="#mountains" x="960"/>
+  </g>
+
+  <!-- 雪地 -->
+  <path d="M0 400 Q 240 380 480 400 T 960 400 L960 540 L0 540Z" fill="#eef5fb"/>
+
+  <!-- 近景滚动 -->
+  <g class="near">
+    <use href="#props"/>
+    <use href="#props" x="960"/>
+  </g>
+
+  <!-- 影子 -->
+  <ellipse cx="470" cy="478" rx="190" ry="14" fill="#9fb6cc" opacity=".6"/>
+
+  <!-- 骑手与熊 -->
+  <g class="rider">
+    <!-- 后腿（远侧） -->
+    <g fill="#c9d6e2">
+      <rect class="leg legB" x="330" y="390" width="42" height="85" rx="18"/>
+      <rect class="leg legA" x="530" y="390" width="42" height="85" rx="18"/>
+    </g>
+
+    <!-- 熊身 -->
+    <ellipse cx="460" cy="370" rx="170" ry="80" fill="url(#fur)"/>
+    <!-- 尾巴 -->
+    <circle cx="292" cy="350" r="14" fill="#fff"/>
+
+    <!-- 前腿（近侧） -->
+    <g fill="#f4f8fb">
+      <rect class="leg legA" x="360" y="395" width="46" height="85" rx="20"/>
+      <rect class="leg legB" x="560" y="395" width="46" height="85" rx="20"/>
+    </g>
+
+    <!-- 熊头 -->
+    <g class="bearHead">
+      <ellipse cx="640" cy="330" rx="70" ry="52" fill="url(#fur)"/>
+      <ellipse cx="700" cy="345" rx="34" ry="24" fill="#f6f9fc"/>
+      <circle cx="610" cy="285" r="16" fill="#f2f6fa"/>
+      <circle cx="610" cy="285" r="8" fill="#d6c2c2"/>
+      <circle cx="660" cy="322" r="6" fill="#1a1a1a"/>
+      <circle cx="662" cy="320" r="2" fill="#fff"/>
+      <ellipse cx="728" cy="338" rx="10" ry="8" fill="#1a1a1a"/>
+      <path d="M705 360 Q 715 368 728 360" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- 红色缰绳 -->
+      <path d="M680 365 Q 640 380 600 360" stroke="#b3261e" stroke-width="5" fill="none"/>
+    </g>
+
+    <!-- 鞍 -->
+    <path d="M400 300 Q 460 280 520 300 L515 330 Q 460 318 405 330Z" fill="#8b1a1a"/>
+    <path d="M405 330 L395 370 L525 370 L515 330Z" fill="#b3261e"/>
+    <path d="M400 345 H525" stroke="#f3d27a" stroke-width="4"/>
+
+    <!-- ===== 秦始皇 ===== -->
+    <!-- 披风 -->
+    <path class="cape" d="M440 200 Q 370 230 340 320 Q 380 330 430 300Z" fill="#7a1010"/>
+    <!-- 腿 -->
+    <path d="M445 300 Q 430 340 440 370 L462 370 Q 458 335 470 305Z" fill="#141414"/>
+    <rect x="432" y="365" width="34" height="12" rx="5" fill="#3a2614"/>
+    <!-- 身体（黑袍） -->
+    <path d="M425 190 Q 460 180 495 190 L505 305 Q 460 318 418 305Z" fill="url(#robe)"/>
+    <!-- 衣襟与腰带 -->
+    <path d="M460 188 L438 250 L478 250Z" fill="#b3261e"/>
+    <path d="M460 188 L440 245 M460 188 L480 245" stroke="#f3d27a" stroke-width="3"/>
+    <rect x="420" y="250" width="84" height="14" fill="#f3d27a"/>
+    <circle cx="462" cy="257" r="6" fill="#2f7d5b"/>
+    <!-- 纹饰 -->
+    <path d="M430 280 q 8 -8 16 0 q 8 8 16 0 q 8 -8 16 0 q 8 8 16 0" stroke="#f3d27a" stroke-width="2" fill="none"/>
+
+    <!-- 牵缰的手 -->
+    <path d="M495 205 Q 540 240 580 255" stroke="#141414" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <circle cx="585" cy="257" r="10" fill="#f1c9a0"/>
+    <path d="M585 257 Q 600 300 640 350" stroke="#b3261e" stroke-width="4" fill="none"/>
+
+    <!-- 举剑手臂 -->
+    <g class="swordArm">
+      <path d="M430 205 Q 400 180 395 140" stroke="#141414" stroke-width="20" stroke-linecap="round" fill="none"/>
+      <circle cx="395" cy="135" r="10" fill="#f1c9a0"/>
+      <!-- 剑 -->
+      <rect x="380" y="128" width="30" height="7" rx="2" fill="#f3d27a"/>
+      <rect x="391" y="135" width="8" height="18" fill="#5a3b22"/>
+      <path d="M391 128 L395 40 L399 128Z" fill="#dfe8ef" stroke="#9fb0bf" stroke-width="1"/>
+    </g>
+
+    <!-- 头 -->
+    <rect x="452" y="160" width="18" height="22" fill="#f1c9a0"/>
+    <ellipse cx="461" cy="140" rx="30" ry="33" fill="#f1c9a0"/>
+    <!-- 眉眼 -->
+    <path d="M440 128 L455 131 M467 131 L482 128" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+    <path d="M444 138 h9 M469 138 h9" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+    <!-- 胡须 -->
+    <path d="M446 156 Q 461 150 476 156" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M452 162 Q 461 192 470 162Z" fill="#1a1a1a"/>
+    <!-- 冕冠 -->
+    <rect x="440" y="98" width="42" height="14" rx="3" fill="#1a1a1a"/>
+    <rect x="455" y="90" width="12" height="10" fill="#f3d27a"/>
+    <rect x="405" y="84" width="112" height="8" rx="2" fill="#141414" transform="rotate(-4 461 88)"/>
+    <!-- 冕旒（珠帘） -->
+    <g fill="#e8b84a" stroke="#c99a2e" stroke-width="1">
+      <g class="bead"><line x1="410" y1="92" x2="410" y2="116" stroke="#c99a2e"/><circle cx="410" cy="104" r="3"/><circle cx="410" cy="114" r="3"/></g>
+      <g class="bead"><line x1="424" y1="91" x2="424" y2="118" stroke="#c99a2e"/><circle cx="424" cy="104" r="3"/><circle cx="424" cy="116" r="3"/></g>
+      <g class="bead"><line x1="498" y1="86" x2="498" y2="112" stroke="#c99a2e"/><circle cx="498" cy="98" r="3"/><circle cx="498" cy="110" r="3"/></g>
+      <g class="bead"><line x1="512" y1="85" x2="512" y2="110" stroke="#c99a2e"/><circle cx="512" cy="97" r="3"/><circle cx="512" cy="108" r="3"/></g>
+    </g>
+
+    <!-- 背后旗帜「秦」 -->
+    <line x1="350" y1="330" x2="350" y2="120" stroke="#5a3b22" stroke-width="6"/>
+    <g class="flag">
+      <path d="M353 125 L430 132 L425 200 L353 195Z" fill="#141414" stroke="#b3261e" stroke-width="4"/>
+      <text x="390" y="178" font-size="40" text-anchor="middle" fill="#f3d27a" font-weight="bold" font-family="KaiTi, STKaiti, serif">秦</text>
+    </g>
+  </g>
+
+  <!-- 雪花 -->
+  <g class="snow" fill="#fff">
+    <circle cx="60"  cy="0" r="3" style="animation-duration:7s;animation-delay:-1s"/>
+    <circle cx="150" cy="0" r="2" style="animation-duration:9s;animation-delay:-4s"/>
+    <circle cx="240" cy="0" r="4" style="animation-duration:6s;animation-delay:-2s"/>
+    <circle cx="330" cy="0" r="2" style="animation-duration:8s;animation-delay:-6s"/>
+    <circle cx="420" cy="0" r="3" style="animation-duration:10s;animation-delay:-3s"/>
+    <circle cx="510" cy="0" r="2" style="animation-duration:7s;animation-delay:-5s"/>
+    <circle cx="600" cy="0" r="4" style="animation-duration:9s;animation-delay:-1s"/>
+    <circle cx="690" cy="0" r="3" style="animation-duration:6s;animation-delay:-4s"/>
+    <circle cx="780" cy="0" r="2" style="animation-duration:8s;animation-delay:-2s"/>
+    <circle cx="870" cy="0" r="3" style="animation-duration:7s;animation-delay:-6s"/>
+    <circle cx="950" cy="0" r="4" style="animation-duration:10s;animation-delay:-5s"/>
+    <circle cx="100" cy="0" r="2" style="animation-duration:11s;animation-delay:-8s"/>
+    <circle cx="380" cy="0" r="3" style="animation-duration:8s;animation-delay:-7s"/>
+    <circle cx="660" cy="0" r="2" style="animation-duration:12s;animation-delay:-9s"/>
+    <circle cx="900" cy="0" r="3" style="animation-duration:9s;animation-delay:-7s"/>
+  </g>
+</svg>
+
+<div class="caption">“朕统六合，今巡北极！”</div>
+</body>
+</html>
